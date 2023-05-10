@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.miqueassantillan.Portfolio.Web.PortfolioWebApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 14.663 s - in com.miqueassantillan.Portfolio.Web.PortfolioWebApplicationTests
