@@ -2,7 +2,6 @@ package com.miqueassantillan.Portfolio.Web.controller;
 import com.miqueassantillan.Portfolio.Web.model.Persona;
 import com.miqueassantillan.Portfolio.Web.servicio.IPersonaService;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
