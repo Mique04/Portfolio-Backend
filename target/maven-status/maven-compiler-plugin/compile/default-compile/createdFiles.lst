@@ -1,7 +1,9 @@
+com\miqueassantillan\Portfolio\Web\controller\AppConfig$appConfig.class
 com\miqueassantillan\Portfolio\Web\servicio\IPersonaService.class
 com\miqueassantillan\Portfolio\Web\servicio\PersonaService.class
 com\miqueassantillan\Portfolio\Web\model\Persona.class
 com\miqueassantillan\Portfolio\Web\repository\PersonaRepository.class
+com\miqueassantillan\Portfolio\Web\controller\AppConfig.class
 com\miqueassantillan\Portfolio\Web\validation\ExisteUsuario.class
 com\miqueassantillan\Portfolio\Web\controller\Controller.class
 com\miqueassantillan\Portfolio\Web\PortfolioWebApplication.class
