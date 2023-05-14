@@ -16,21 +16,35 @@ public class ValidacionUsuario {
     private static final String CONTRASEÑA = "PntTfFs1UnAyl8sxUEvG";
 
     public boolean validarUsuario(String correoElectronico, String contrasena) {
-        String sql = "SELECT * FROM persona WHERE email = ?";
-        try (Connection conn = DriverManager.getConnection(URL, USUARIO, CONTRASEÑA);
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, correoElectronico);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                String contrasenaRegistrada = rs.getString("contrasena");
-                return contrasenaRegistrada.equals(contrasena);
-            } else {
-                return false;
+    String sql = "SELECT * FROM persona WHERE email = ?";
+    try (Connection conn = DriverManager.getConnection(URL, USUARIO, CONTRASEÑA);
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+        stmt.setString(1, correoElectronico);
+        ResultSet rs = stmt.executeQuery();
+        
+        // Proceso 5
+        if (rs.next()) {
+            String contrasenaRegistrada = rs.getString("contraseña");
+            boolean contrasenaValida = contrasenaRegistrada.equals(contrasena);
+            
+            // Proceso 6
+            if (contrasenaValida) {
+                System.out.println("Paso 6 funciona");
             }
-        } catch (SQLException e) {
-            // Manejar la excepción aquí
+            
+            return contrasenaValida;
+        } else {
+            return false;
         }
+    } catch (SQLException e) {
+        // Manejar la excepción aquí
+        
+        // Proceso 9
+        System.out.println("Paso 9 funciona");
+        
         return false;
     }
+}
+
 }
 
