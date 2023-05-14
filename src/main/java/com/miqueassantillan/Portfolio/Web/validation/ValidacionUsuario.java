@@ -16,7 +16,7 @@ public class ValidacionUsuario {
     private static final String CONTRASEÑA = "PntTfFs1UnAyl8sxUEvG";
 
     public boolean validarUsuario(String correoElectronico, String contrasena) {
-        String sql = "SELECT * FROM persona WHERE Email = ?";
+        String sql = "SELECT * FROM persona WHERE email = ?";
         try (Connection conn = DriverManager.getConnection(URL, USUARIO, CONTRASEÑA);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, correoElectronico);
