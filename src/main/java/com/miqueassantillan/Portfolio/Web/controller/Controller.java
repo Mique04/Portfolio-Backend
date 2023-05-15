@@ -52,7 +52,7 @@ public class Controller {
             return ResponseEntity.ok("Has iniciado sesion exitosamente");
         } else {
             
-            return ResponseEntity.badRequest().body("El email o contraseña ingresado es incorrecto");
+            return ResponseEntity.badRequest().body(validacionUsuario.validarUsuario(per.email, per.contraseña));
         }
     }
 
