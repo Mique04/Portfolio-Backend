@@ -21,6 +21,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class Controller {
 
     @Autowired
+    private ValidacionUsuario validacionUsuario;
+    @Autowired
+    private ExisteUsuario ExisteUsuario;
+    @Autowired
     private IPersonaService persoServ;
 
     @GetMapping("ver/personas")
@@ -35,24 +39,22 @@ public class Controller {
 
     @PostMapping("new/persona")
     public ResponseEntity<?> CrearPersona(@RequestBody Persona per) {
-        ExisteUsuario existeUsuario = new ExisteUsuario();
-        if (!existeUsuario.existeUsuario(per.getEmail())) {
+        if (ExisteUsuario.existeUsuario(per.email)) {
             persoServ.crearPersona(per);
             return ResponseEntity.ok("Usuario registrado exitosamente");
         } else {
           
-            return ResponseEntity.badRequest().body("El usuario ya existe, por favor inicie sesion");
+            return ResponseEntity.badRequest().body(ExisteUsuario.existeUsuario(per.email) + ": El usuario ya existe, por favor regrese e inicie sesion");
         }
     }
     
     @PostMapping("validar/persona")
     public ResponseEntity<?> ValidarPersona(@RequestBody Persona per) {
-      ValidacionUsuario validacionUsuario = new ValidacionUsuario();
         if (validacionUsuario.validarUsuario(per.email, per.contraseña)) {
             return ResponseEntity.ok("Has iniciado sesion exitosamente");
         } else {
             
-            return ResponseEntity.badRequest().body(validacionUsuario.validarUsuario(per.email, per.contraseña));
+            return ResponseEntity.badRequest().body("El email o la contraseña ingresado es incorrecto");
         }
     }
 

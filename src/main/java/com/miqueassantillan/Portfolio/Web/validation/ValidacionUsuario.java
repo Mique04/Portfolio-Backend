@@ -9,7 +9,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import org.springframework.stereotype.Component;
 
+
+@Component
 public class ValidacionUsuario {
     private static final String URL = "jdbc:mysql://bdmksmq6uktz66sykzpp-mysql.services.clever-cloud.com:3306/bdmksmq6uktz66sykzpp";
     private static final String USUARIO = "uk5s00rppfmsmyjr";
