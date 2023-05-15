@@ -48,7 +48,7 @@ public class Controller {
     @PostMapping("validar/persona")
     public ResponseEntity<?> ValidarPersona(@RequestBody Persona per) {
       ValidacionUsuario validacionUsuario = new ValidacionUsuario();
-        if (validacionUsuario.validarUsuario(per.getEmail(), per.getContraseña())) {
+        if (validacionUsuario.validarUsuario(per.email, per.contraseña)) {
             return ResponseEntity.ok("Has iniciado sesion exitosamente");
         } else {
             
