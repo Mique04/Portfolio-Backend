@@ -7,7 +7,7 @@ import com.miqueassantillan.Portfolio.Web.validation.ValidacionUsuario;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
+//import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "https://portfolio-mique2704.web.app")
+//@CrossOrigin(origins = "https://portfolio-mique2704.web.app")
 public class Controller {
 
     @Autowired
@@ -39,22 +39,26 @@ public class Controller {
 
     @PostMapping("new/persona")
     public ResponseEntity<?> CrearPersona(@RequestBody Persona per) {
-        if (ExisteUsuario.existeUsuario(per.email)) {
+        boolean existe = ExisteUsuario.existeUsuario(per.email);
+        if (!existe) {
             persoServ.crearPersona(per);
-            return ResponseEntity.ok("Usuario registrado exitosamente");
+            System.out.println("Usuario registrado con exito");
+            return ResponseEntity.ok("existeUsuario devolvio: " + existe + "| Usuario registrado exitosamente");
         } else {
-          
-            return ResponseEntity.badRequest().body(ExisteUsuario.existeUsuario(per.email) + ": El usuario ya existe, por favor regrese e inicie sesion");
+            System.out.println("El usuario ya existe");
+            return ResponseEntity.badRequest().body("existeUsuario devolvio: " + existe + "| El usuario ya existe, por favor regrese e inicie sesion");
         }
     }
     
     @PostMapping("validar/persona")
     public ResponseEntity<?> ValidarPersona(@RequestBody Persona per) {
-        if (validacionUsuario.validarUsuario(per.email, per.contraseña)) {
-            return ResponseEntity.ok("Has iniciado sesion exitosamente");
+        boolean fueValidado = validacionUsuario.validarUsuario(per.email, per.contraseña);
+        if (fueValidado) {
+            System.out.println("Has iniciado sesion exitosamente");
+            return ResponseEntity.ok("la validacion devolvio: " + fueValidado + "| Has iniciado sesion exitosamente");
         } else {
-            
-            return ResponseEntity.badRequest().body("El email o la contraseña ingresado es incorrecto");
+            System.out.println("El email o la contraseña ingresado es incorrecto");
+            return ResponseEntity.badRequest().body("la validacion devolvio: " + fueValidado + "| El email o la contraseña ingresado es incorrecto");
         }
     }
 

@@ -20,12 +20,12 @@ public class ExisteUsuario {
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, correoElectronico);
             ResultSet rs = stmt.executeQuery();
-            System.out.println("Coinciden los datos");
-            return rs.next();
+            System.out.println("El email ya está registrado en la base de datos");
+            rs.next();
+            return true;
         } catch (SQLException e) {
-            // Manejar la excepción aquí
+            System.out.println("No se logró conectar con la base de datos o no coincidieron los datos");
+            return false;
         }
-         System.out.println("No se logró conectar con la base de datos o no coincidieron los datos");
-        return false;
     }
 }

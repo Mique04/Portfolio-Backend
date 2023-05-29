@@ -24,27 +24,17 @@ public class ValidacionUsuario {
          PreparedStatement stmt = conn.prepareStatement(sql)) {
         stmt.setString(1, correoElectronico);
         ResultSet rs = stmt.executeQuery();
-        
-        // Proceso 5
         if (rs.next()) {
             String contrasenaRegistrada = rs.getString("contraseña");
             boolean contrasenaValida = contrasenaRegistrada.equals(contrasena);
-            
-            // Proceso 6
-            if (contrasenaValida) {
-                System.out.println("Paso 6 funciona");
-            }
-            
+            System.out.println("Datos validados con exito");
             return contrasenaValida;
         } else {
+            System.out.println("Datos incorrectos");
             return false;
         }
     } catch (SQLException e) {
-        // Manejar la excepción aquí
-        
-        // Proceso 9
-        System.out.println("Paso 9 funciona");
-        
+        System.out.println("No se logró conectar con la base de datos o el email no se encuentra registrado");
         return false;
     }
 }
