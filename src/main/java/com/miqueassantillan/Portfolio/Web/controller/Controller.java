@@ -38,27 +38,27 @@ public class Controller {
     }
 
     @PostMapping("new/persona")
-    public ResponseEntity<?> CrearPersona(@RequestBody Persona per) {
+    public boolean CrearPersona(@RequestBody Persona per) {
         boolean existe = ExisteUsuario.existeUsuario(per.email);
         if (!existe) {
             persoServ.crearPersona(per);
             System.out.println("Usuario registrado con exito");
-            return ResponseEntity.ok("existeUsuario devolvio: " + existe + "| Usuario registrado exitosamente");
+            return true;
         } else {
             System.out.println("El usuario ya existe");
-            return ResponseEntity.badRequest().body("existeUsuario devolvio: " + existe + "| El usuario ya existe, por favor regrese e inicie sesion");
+            return false;
         }
     }
     
     @PostMapping("validar/persona")
-    public ResponseEntity<?> ValidarPersona(@RequestBody Persona per) {
+    public boolean ValidarPersona(@RequestBody Persona per) {
         boolean fueValidado = validacionUsuario.validarUsuario(per.email, per.contraseña);
         if (fueValidado) {
             System.out.println("Has iniciado sesion exitosamente");
-            return ResponseEntity.ok("la validacion devolvio: " + fueValidado + "| Has iniciado sesion exitosamente");
+            return true;
         } else {
             System.out.println("El email o la contraseña ingresado es incorrecto");
-            return ResponseEntity.badRequest().body("la validacion devolvio: " + fueValidado + "| El email o la contraseña ingresado es incorrecto");
+            return false;
         }
     }
 
